@@ -1,0 +1,1 @@
+ALTER TABLE spaces ADD rules VARCHAR(255);

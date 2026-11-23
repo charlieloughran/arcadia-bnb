@@ -1,0 +1,15 @@
+spring:
+  security:
+    oauth2:
+      client:
+        provider:
+          zitadel:
+            issuer-uri: https://makersbnb-sorl9h.eu1.zitadel.cloud
+        registration:
+          zitadel:
+            client-id: 400900034553553631
+            scope:
+              - openid
+              - profile
+              - email
+

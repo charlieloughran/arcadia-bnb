@@ -11,8 +11,10 @@ import org.springframework.web.servlet.ModelAndView;
 @RestController
 public class StaticPageController {
 
+
     @Autowired
     SpaceRepository spaceRepository;
+
 
     @GetMapping("/")
     public ModelAndView landingPage() {
@@ -43,14 +45,4 @@ public class StaticPageController {
         return modelAndView;
     }
 
-    @GetMapping("/spaces")
-    public ModelAndView spaces() {
-        ModelAndView modelAndView = new ModelAndView("/Spaces");
-
-        Iterable<Space> spaces = spaceRepository.findAll();
-        modelAndView.addObject("spaces", spaces);
-
-
-        return modelAndView;
-    }
 }
