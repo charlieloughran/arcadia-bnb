@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org" lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>MakersBnB - The Team</title>
+</head>
+<body>
+<ul>
+    <li th:each="teamMember : ${team}" th:text="${teamMember}"></li>
+</ul>
+</body>
+</html>
