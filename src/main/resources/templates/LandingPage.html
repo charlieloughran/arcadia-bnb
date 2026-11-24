@@ -8,9 +8,16 @@
 </head>
 <body>
 
-<div sec:authorize="isAuthenticated()">
-    Hello, you are logged in as <span sec:authentication="principal.attributes['email']"></span>
+<div sec:authorize="isAnonymous()">
+    <a href="/oauth2/authorization/zitadel">Login</a>
 </div>
+
+<div sec:authorize="isAuthenticated()">
+    Hello, you are logged in as <span sec:authentication="principal.attributes['preferred_username']">
+</span>
+</div>
+
+<a sec:authorize="isAuthenticated()" href="/logout">Logout</a>
 
 <h1>Welcome to MakersBnB</h1>
 
