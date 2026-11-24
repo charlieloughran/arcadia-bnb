@@ -5,9 +5,12 @@ import com.makers.makersbnb.repository.SpaceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
+
+import java.time.LocalDate;
 
 @RestController
 public class SpacesController {
@@ -41,5 +44,27 @@ public class SpacesController {
         spaceRepository.save(space);
 
         return new RedirectView("/spaces");
+    }
+
+    @PostMapping("/spaces/search")
+    public ModelAndView searchSpaces(@RequestParam("availability") LocalDate availability) {
+         ModelAndView filteredSpaces = new ModelAndView("/spaces");
+
+         Iterable<Space> spaces = spaceRepository.findByAvailability( availability);
+
+        filteredSpaces.addObject("spaces", spaces);
+
+        return filteredSpaces;
+    }
+
+    @PostMapping("/spaces/improved_search")
+    public ModelAndView searchSpacesBetweenDates(@RequestParam("availability_start") LocalDate availability_start, @RequestParam("availability_end") LocalDate availability_end) {
+        ModelAndView filteredSpaces = new ModelAndView("/spaces");
+
+        Iterable<Space> spaces = spaceRepository.findByAvailabilityStartAndEnd(availability_start, availability_end);
+
+        filteredSpaces.addObject("spaces", spaces);
+
+        return filteredSpaces;
     }
 }
