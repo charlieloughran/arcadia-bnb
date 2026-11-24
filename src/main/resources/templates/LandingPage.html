@@ -4,30 +4,41 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>MakersBnB</title>
+    <title>ArcadiaBnB</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+
 </head>
 <body>
 
-<div sec:authorize="isAnonymous()">
-    <a href="/oauth2/authorization/zitadel">Login</a>
+<div th:insert="~{navbar :: navbar}">  </div>
+
+
+<div class="container">
+
+    <h1>Welcome to ArcadiaBnB</h1>
+
+    <div class="space-list">
+
+    <h2 th:text="${nSpaces} + ' spaces are waiting to be discovered'"></h2>
+
+
+        <div class="spaces-grid">
+            <div th:each="space : ${spaces}">
+                <div th:replace="~{space-card :: space-card}"></div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <h4>Recent Reviews</h4>
+    <ul>
+    <li th:each="review : ${reviews}" th:text="${review}"></li>
+    </ul>
+
+    <h5 th:text="'Number of bookings made last week: ' + ${nBookings}"></h5>
+
 </div>
 
-<div sec:authorize="isAuthenticated()">
-    Hello, you are logged in as <span sec:authentication="principal.attributes['preferred_username']">
-</span>
-</div>
-
-<a sec:authorize="isAuthenticated()" href="/logout">Logout</a>
-
-<h1>Welcome to MakersBnB</h1>
-
-<h3 th:text="${nSpaces} + ' spaces are waiting to be discovered'"></h3>
-
-<h4>Recent Reviews</h4>
-<ul>
-<li th:each="review : ${reviews}" th:text="${review}"></li>
-</ul>
-
-<h5 th:text="'Number of bookings made last week: ' + ${nBookings}"></h5>
 </body>
 </html>

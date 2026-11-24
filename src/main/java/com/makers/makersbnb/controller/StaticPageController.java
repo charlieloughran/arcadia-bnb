@@ -25,6 +25,10 @@ public class StaticPageController {
 
         modelAndView.addObject("nSpaces", nSpaces);
 
+
+        Iterable<Space> spaces = spaceRepository.findAll();
+        modelAndView.addObject("spaces", spaces);
+
         String [] reviews = new String[] {"Awesome", "Nice", "Perfect"};
         modelAndView.addObject("reviews", reviews);
 

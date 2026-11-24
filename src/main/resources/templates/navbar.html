@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>ArcadiaBnB</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<header class="site-header">
+    <nav th:fragment="navbar" class="navbar" aria-label="Main navigation">
+        <a class="logo" th:href="@{/}">ArcadiaBnB</a>
+
+        <ul class="nav-links center-links">
+            <li><a class="nav-link" th:href="@{/spaces}">Spaces</a></li>
+            <li><a class="nav-link" th:href="@{/contactus}">Contact</a></li>
+        </ul>
+
+        <div class="nav-auth-section">
+            <div sec:authorize="isAnonymous()">
+                <a class="btn btn-primary" href="/oauth2/authorization/zitadel">Login</a>
+            </div>
+
+            <div sec:authorize="isAuthenticated()" class="user-auth-item">
+                <span class="username-display">
+                    <span sec:authentication="principal.attributes['preferred_username']">User</span>
+                </span>
+                <a th:href="@{/logout}" class="btn btn-outline">Logout</a>
+            </div>
+        </div>
+    </nav>
+</header>
+</body>
+</html>

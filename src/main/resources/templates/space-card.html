@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Space Card</title>
+</head>
+<body>
+<div th:fragment="space-card" class="space-card" th:object="${space}">
+    <h3 th:text="*{name}">Name</h3>
+    <p class="space-price" th:text="${'£' + space.price + ' / night'}"> / night</p>
+    <p class="space-desc" th:text="*{description}">Description</p>
+    <a th:href="@{/spaces}" class="btn btn-primary">View Details</a>
+</div>
+</body>
+</html>
