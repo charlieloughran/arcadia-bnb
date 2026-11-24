@@ -14,22 +14,11 @@
 
 
 <div class="container">
-    <table>
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Price (£)</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:each="space : ${spaces}">
-                <td th:text="${space.name}">Space Name</td>
-                <td th:text="${space.description}">Description</td>
-                <td th:text="${space.price}">Price</td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="spaces-grid">
+        <div th:each="space : ${spaces}">
+            <div th:replace="~{space-card :: space-card}"></div>
+        </div>
+    </div>
 </div>
 </body>
 </html>
