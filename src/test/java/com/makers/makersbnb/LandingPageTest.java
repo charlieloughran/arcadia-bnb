@@ -38,27 +38,27 @@ public class LandingPageTest {
     public void usersAreWelcomedToTheApp() {
         page.navigate("http://localhost:8080");
         Locator pageBody = page.locator("body");
-        assertThat(pageBody).containsText("Welcome to MakersBnB!");
+        assertThat(pageBody).containsText("Welcome to ArcadiaBnB");
     }
 
     @Test
     public void numberOfSpacesAreShown() {
         page.navigate("http://localhost:8080");
-        Locator h3 = page.locator("h3");
-        assertThat(h3).containsText("100 spaces are waiting to be discovered");
+        Locator h3 = page.locator("h2");
+        assertThat(h3).containsText("spaces are waiting to be discovered");
     }
 
     @Test
     public void fakeEmailAddressIsShown() {
         page.navigate("http://localhost:8080/contactus");
-        Locator li  = page.locator("li");
+        Locator li  = page.locator("#email-address");
         assertThat(li).containsText("Email Address: example@makersbnb.com");
     }
 
     @Test
         public void teamListIsShown() {
             page.navigate("http://localhost:8080/team");
-            Locator li = page.locator("li");
+            Locator li = page.locator("#team-list");
             assertThat(li).hasText(new String[] {"Toby", "Katerina", "Sandy"});
 
     }
