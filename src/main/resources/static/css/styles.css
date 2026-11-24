@@ -137,31 +137,12 @@ main {
     display: flex;
     flex-direction: column;
     gap: 2rem;
-    align-items: center;
+    align-items: stretch;
     max-width: 1200px;
     width: 100%;
     margin: 2rem auto;
     padding: 0 1.5rem;
     flex: 1;
-}
-
-.btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0.5rem 1rem;
-    border-radius: var(--border-radius-xs);
-    border: 1px solid transparent;
-    cursor: pointer;
-    text-decoration: none;
-    text-transform: uppercase;
-    letter-spacing: 0.1rem;
-    white-space: nowrap;
-    flex-shrink: 0;
-    font-size: 1rem;
-    font-family: var(--font-main);
-    font-weight: 500;
-    transition: background-color var(--transition-fast);
 }
 
 .btn {
@@ -232,7 +213,9 @@ main {
     padding: 1.5rem;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     gap: 1rem;
+    height: 100%;
 }
 
 .space-price {
@@ -252,4 +235,75 @@ main {
     color: var(--text-main);
     font-size: 0.85rem;
     text-transform: uppercase;
+}
+
+.search-section-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  background: var(--secondary-color);
+  padding: 24px;
+  flex-wrap: wrap;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.search-form {
+  display: flex;
+  align-items: flex-end;
+  gap: 12px;
+  flex: 1 1 300px;
+  min-width: 280px;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+  min-width: 0;
+}
+
+.input-group label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-light);
+}
+
+.input-group input[type="date"] {
+  padding: 10px 12px;
+  border: 2px var(--background-color) solid;
+  font-size: 14px;
+  color: #1f2937;
+  outline: none;
+  background-color: #f9fafb;
+  transition: border-color 0.2s, box-shadow 0.2s, background-color 0.2s;
+}
+
+.input-group input[type="date"]:focus {
+  border: 2px var(--accent-color) solid;
+  background-color: #ffffff;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+.search-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  color: var(--text-light);
+  font-size: 13px;
+  letter-spacing: 0.5px;
+}
+
+/* Responsive breakpoint: Stack vertically on smaller screens */
+@media (max-width: 900px) {
+  .search-section-wrapper {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .search-divider {
+    margin: 4px 0;
+  }
 }

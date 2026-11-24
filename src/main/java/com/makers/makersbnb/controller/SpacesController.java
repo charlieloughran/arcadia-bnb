@@ -46,7 +46,7 @@ public class SpacesController {
         return new RedirectView("/spaces");
     }
 
-    @PostMapping("/spaces/search")
+    @GetMapping("/spaces/search")
     public ModelAndView searchSpaces(@RequestParam("availability") LocalDate availability) {
          ModelAndView filteredSpaces = new ModelAndView("/spaces");
 
@@ -57,7 +57,7 @@ public class SpacesController {
         return filteredSpaces;
     }
 
-    @PostMapping("/spaces/improved_search")
+    @GetMapping("/spaces/searchByStartAndEnd")
     public ModelAndView searchSpacesBetweenDates(@RequestParam("availability_start") LocalDate availability_start, @RequestParam("availability_end") LocalDate availability_end) {
         ModelAndView filteredSpaces = new ModelAndView("/spaces");
 

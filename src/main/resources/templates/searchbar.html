@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ArcadiaBnB</title>
+</head>
+
+<div th:fragment="searchbar" class="search-section-wrapper">
+    <!-- Single Date Search -->
+    <form class="search-form" th:action="@{/spaces/search}" method="get">
+        <div class="input-group">
+            <label for="availability">Select Date</label>
+            <input type="date" id="availability" name="availability" th:value="${selectedDate}" required />
+        </div>
+        <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+
+    <div class="search-divider">
+        <span>OR</span>
+    </div>
+
+    <!-- Date Range Search -->
+    <form class="search-form" th:action="@{/spaces/improved_search}" method="get">
+        <div class="input-group">
+            <label for="availability_start">Start Date</label>
+            <input type="date" id="availability_start" name="availability_start" th:value="${selectedDate}" required />
+        </div>
+        <div class="input-group">
+            <label for="availability_end">End Date</label>
+            <input type="date" id="availability_end" name="availability_end" th:value="${selectedDate}" required />
+        </div>
+        <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+</div>
+</html>
