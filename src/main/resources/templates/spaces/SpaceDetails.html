@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>ArcadiaBnB - Space Name</title>
+</head>
+<body>
+<div class="space-details" th:object="${space}">
+    <h3 th:text="*{name}">Name</h3>
+    <p class="space-price" th:text="${'£' + space.price + ' / night'}"> / night</p>
+    <p class="space-desc" th:text="*{description}">Description</p>
+    <div class="space-availability">
+        <p th:text="*{availability_start}">Available From</p>
+        <p th:text="*{availability_end}">Available To</p>
+    </div>
+    <a th:href="@{/spaces/{id}/book(id=*{id})}" class="btn btn-primary">Book Now</a>
+</div>
+</body>
+</html>

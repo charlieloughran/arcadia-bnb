@@ -3,10 +3,7 @@ package com.makers.makersbnb.controller;
 import com.makers.makersbnb.model.Space;
 import com.makers.makersbnb.repository.SpaceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -44,6 +41,16 @@ public class SpacesController {
         spaceRepository.save(space);
 
         return new RedirectView("/spaces");
+    }
+
+    @GetMapping("/spaces/{id}")
+    public ModelAndView getSpaceDetails(@PathVariable Long id, Space space) {
+        ModelAndView spaceDetails = new ModelAndView("spaces/SpaceDetails");
+
+        spaceDetails.addObject("spaceDetails", space);
+
+        return spaceDetails;
+
     }
 
     @GetMapping("/spaces/search")
