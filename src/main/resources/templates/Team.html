@@ -11,8 +11,8 @@
 <div th:insert="~{navbar :: navbar}">  </div>
 
 <div class="container">
-<ul>
-    <li id="team-list" th:each="teamMember : ${team}" th:text="${teamMember}"></li>
+<ul id="team-list">
+    <li  th:each="teamMember : ${team}" th:text="${teamMember}"></li>
 </ul>
 </div>
 </body>

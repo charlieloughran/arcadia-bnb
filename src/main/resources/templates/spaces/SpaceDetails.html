@@ -12,17 +12,29 @@
 
 
 <div class="container">
+
+
+
 <div class="space-card" th:object="${space}">
     <h1 th:text="*{name}">Name</h1>
     <p class="space-price" th:text="${'£' + space.price + ' / night'}"> / night</p>
-    <p class="space-desc" th:text="*{description}">Description</p>
-    <div class="space-availability">
-        <p th:text="*{availability_start}">Available From</p>
-        <p th:text="*{availability_end}">Available To</p>
+    <div class="search-section-wrapper">
+        <form class="search-form" th:action="@{/spaces/{id}/book(id=*{id})}" method="post">
+            <div class="input-group">
+                <label for="booked_from">Book From</label>
+                <input type="date" id="booked_from" name="booked_from" th:value="${selectedDate}" required />
+            </div>
+            <div class="input-group">
+                <label for="booked_until">Book Until</label>
+                <input type="date" id="booked_until" name="booked_until" th:value="${selectedDate}" required />
+            </div>
+            <button type="submit" class="btn btn-primary">Book</button>
+        </form>
     </div>
-    <a th:href="@{/spaces/{id}/book(id=*{id})}" class="btn btn-primary">Book Now</a>
 </div>
 
+    <h2>Description</h2>
+    <p class="space-desc" th:text="${space.description}">Description</p>
     <h3>Rules</h3>
     <p th:text="${space.rules}">Rules</p>
 
