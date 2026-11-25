@@ -27,7 +27,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/","/contactus","/termsandconditions", "/spaces", "/team", "/css/**").permitAll()
+                        .requestMatchers("/","/contactus","/termsandconditions", "/spaces/**", "/team", "/css/**").permitAll()
                         .anyRequest().authenticated())
                 .oauth2Login(Customizer.withDefaults())
                 .logout(logout -> logout
@@ -38,7 +38,7 @@ public class SecurityConfig {
     private LogoutSuccessHandler oidcLogoutSuccessHandler() {
         OidcClientInitiatedLogoutSuccessHandler handler =
                 new OidcClientInitiatedLogoutSuccessHandler(clientRegistrationRepository);
-        handler.setPostLogoutRedirectUri("http://localhost:8080");
+        handler.setPostLogoutRedirectUri("{baseUrl}");
         return handler;
     }
 

@@ -3,10 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <title>ArcadiaBnB - Space Name</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+
 </head>
 <body>
-<div class="space-details" th:object="${space}">
-    <h3 th:text="*{name}">Name</h3>
+
+<div th:insert="~{navbar :: navbar}">  </div>
+
+
+<div class="container">
+<div class="space-card" th:object="${space}">
+    <h1 th:text="*{name}">Name</h1>
     <p class="space-price" th:text="${'£' + space.price + ' / night'}"> / night</p>
     <p class="space-desc" th:text="*{description}">Description</p>
     <div class="space-availability">
@@ -14,6 +21,11 @@
         <p th:text="*{availability_end}">Available To</p>
     </div>
     <a th:href="@{/spaces/{id}/book(id=*{id})}" class="btn btn-primary">Book Now</a>
+</div>
+
+    <h3>Rules</h3>
+    <p th:text="${space.rules}">Rules</p>
+
 </div>
 </body>
 </html>

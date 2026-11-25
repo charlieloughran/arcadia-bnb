@@ -11,7 +11,7 @@ import java.util.Date;
 
 @Entity
 @Getter @Setter @NoArgsConstructor
-@Table(name = "SPACES")
+@Table(name = "spaces")
 public class Space {
 
     @Id

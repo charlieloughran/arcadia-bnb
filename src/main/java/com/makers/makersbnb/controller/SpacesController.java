@@ -2,12 +2,14 @@ package com.makers.makersbnb.controller;
 
 import com.makers.makersbnb.model.Space;
 import com.makers.makersbnb.repository.SpaceRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import java.time.LocalDate;
+import java.util.Optional;
 
 @RestController
 public class SpacesController {
@@ -44,10 +46,16 @@ public class SpacesController {
     }
 
     @GetMapping("/spaces/{id}")
-    public ModelAndView getSpaceDetails(@PathVariable Long id, Space space) {
+    public ModelAndView getSpaceDetails(@PathVariable Long id) {
         ModelAndView spaceDetails = new ModelAndView("spaces/SpaceDetails");
 
-        spaceDetails.addObject("spaceDetails", space);
+
+        Space space = spaceRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Space not found"));
+
+        System.out.println("Looking for space with ID: " + id);
+        System.out.println(space.getName());
+        spaceDetails.addObject("space", space);
 
         return spaceDetails;
 

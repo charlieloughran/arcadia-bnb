@@ -42,7 +42,7 @@ public class SpaceTest {
         page.navigate("http://localhost:8080/spaces/1");
         Locator h1 = page.locator("h1");
 
-        assertThat(h1).containsText("Peach''s Castle");
+        assertThat(h1).containsText("Peach's Castle");
     }
 
 
