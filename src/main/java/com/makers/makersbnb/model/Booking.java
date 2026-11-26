@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.userdetails.User;
 
 import java.time.LocalDate;
@@ -18,7 +19,10 @@ public class Booking {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
 
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate booked_from;
+
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate booked_until;
 
 

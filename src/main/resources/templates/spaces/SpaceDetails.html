@@ -20,6 +20,7 @@
     <p class="space-price" th:text="${'£' + space.price + ' / night'}"> / night</p>
     <div class="search-section-wrapper">
         <form class="search-form" th:action="@{/spaces/{id}/book(id=*{id})}" method="post">
+            <input type="hidden" name="userId" value="123123" />
             <div class="input-group">
                 <label for="booked_from">Book From</label>
                 <input type="date" id="booked_from" name="booked_from" th:value="${selectedDate}" required />

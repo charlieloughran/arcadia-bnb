@@ -27,8 +27,8 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/","/contactus","/termsandconditions", "/spaces/**", "/spaces/*/book", "/team", "/css/**").permitAll()
-                        .anyRequest().authenticated())
+//                        .requestMatchers("/","/contactus","/termsandconditions", "/spaces/**", "/spaces/1/book", "/team", "/css/**").permitAll()
+                        .anyRequest().permitAll())
                 .oauth2Login(Customizer.withDefaults())
                 .logout(logout -> logout
                         .logoutSuccessHandler(oidcLogoutSuccessHandler()));
