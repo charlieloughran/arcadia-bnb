@@ -1,19 +1,28 @@
 <!DOCTYPE html>
-<html xmlns:th="http://thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 
 <head>
     <meta charset="UTF-8">
-    <title>MakersBnB - The Team</title>
+    <title>ArcadiaBnB - The Team</title>
     <link rel="stylesheet" th:href="@{/css/styles.css}">
-
 </head>
 <body>
-<div th:insert="~{navbar :: navbar}">  </div>
+<div th:insert="~{navbar :: navbar}"></div>
 
-<div class="container">
-<ul >
-    <li id="team-member" th:each="staffMember : ${staff}" th:text="${staffMember.name + ', ' + staffMember.role}"></li>
-</ul>
-</div>
+<main class="container">
+    <header class="card-header">
+        <h1>Meet the Team</h1>
+        <p>The brilliant minds behind ArcadiaBnB.</p>
+    </header>
+
+    <ul class="card-grid">
+        <li class="card" th:each="staffMember : ${staff}">
+            <div class="info">
+                <h3 class="name" th:text="${staffMember.name}">Name</h3>
+                <p class="role" th:text="${staffMember.role}">Role</p>
+            </div>
+        </li>
+    </ul>
+</main>
 </body>
 </html>

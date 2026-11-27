@@ -1,22 +1,50 @@
 <!DOCTYPE html>
-<html xmlns:th="http://thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 
 <head>
     <meta charset="UTF-8">
-    <title>MakersBnB - Contact Us</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ArcadiaBnB - Contact Us</title>
     <link rel="stylesheet" th:href="@{/css/styles.css}">
-
 </head>
 <body>
-<div th:insert="~{navbar :: navbar}">  </div>
+<div th:insert="~{navbar :: navbar}"></div>
 
+<main class="container">
+        <h1>Contact Us</h1>
+        <p>Got a glitch in your booking or need help spawning a new space? Reach out to the control room.</p>
 
-<div class="container">
-<h1>Contact us</h1>
-<p>For more information or any queries, please contact:</p>
-<ul>
-    <li id="email-address" th:text="'Email Address: ' + ${emailAddress}"></li>
-</ul>
-</div>
+    <div class="card-grid">
+        <!-- Main Contact Card -->
+        <div class="card">
+            <h3>Direct Link</h3>
+            <p class="info">For general inquiries, bug reports, and support queries:</p>
+            <p id="email-address" class="price" th:text="${emailAddress}">support@arcadiabnb.com</p>
+            <a th:href="'mailto:' + ${emailAddress}" class="btn btn-primary">Send A Message</a>
+        </div>
+
+        <!-- Extra Mocked Info Card 1 -->
+        <div class="card">
+            <h3>Support Hours</h3>
+            <p class="info">Our operator team is online scanning frequencies around the clock.</p>
+            <div class="space-availability">
+                <p>Monday — Sunday</p>
+                <p>24 / 7 Infinite Mode</p>
+            </div>
+            <span class="btn btn-outline" style="pointer-events: none;">Status: Online</span>
+        </div>
+
+        <!-- Extra Mocked Info Card 2 -->
+        <div class="card">
+            <h3>Headquarters</h3>
+            <p class="info">Visit our main base camp for high scores and coffee breaks.</p>
+            <div class="space-availability">
+                <p>Sector 4, Level 2</p>
+                <p>Arcadia City, Cyber District</p>
+            </div>
+            <span class="btn btn-outline" style="pointer-events: none;">Player Two Welcome</span>
+        </div>
+    </div>
+</main>
 </body>
 </html>

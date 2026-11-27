@@ -19,7 +19,10 @@
     <p class="space-price" th:text="${'£' + booking.space.price + ' / night'}"> / night</p>
 
     <!-- Link back to the space details page -->
-    <a th:href="@{/spaces/{id}(id=*{space.id})}" class="btn btn-secondary">View Space</a>
+    <div class="btn-group">
+        <a th:href="@{/spaces/{id}(id=*{space.id})}" class="btn btn-primary">View Space</a>
+        <a th:href="@{/spaces/{id}/cancel(id=*{space.id})}" class="btn btn-secondary">Cancel Booking</a>
+    </div>
 </div>
 </body>
 </html>

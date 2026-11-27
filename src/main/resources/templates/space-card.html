@@ -7,9 +7,9 @@
 <body>
 <div th:fragment="space-card" class="card" th:object="${space}">
     <h3 th:text="*{name}">Name</h3>
-    <p class="space-price" th:text="${'£' + space.price + ' / night'}"> / night</p>
-    <p class="space-desc" th:text="*{description}">Description</p>
-    <div class="space-availability">
+    <p class="price" th:text="${'£' + space.price + ' / night'}"> / night</p>
+    <p class="info" th:text="*{description}">Description</p>
+    <div class="availability">
         <p th:text="*{availabilityStart}">Available From</p>
         <p th:text="*{availabilityEnd}">Available To</p>
     </div>

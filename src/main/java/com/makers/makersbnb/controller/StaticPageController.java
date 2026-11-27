@@ -1,6 +1,7 @@
 package com.makers.makersbnb.controller;
 
 import com.makers.makersbnb.model.Space;
+import com.makers.makersbnb.repository.BookingRepository;
 import com.makers.makersbnb.repository.SpaceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -15,6 +16,9 @@ public class StaticPageController {
 
     @Autowired
     SpaceRepository spaceRepository;
+
+    @Autowired
+    BookingRepository bookingRepository;
 
 
     @GetMapping("/")
@@ -33,7 +37,7 @@ public class StaticPageController {
         String [] reviews = new String[] {"Awesome", "Nice", "Perfect"};
         modelAndView.addObject("reviews", reviews);
 
-        Integer nBookings = 123;
+        Long nBookings = bookingRepository.count();
         modelAndView.addObject("nBookings", nBookings);
 
         return modelAndView;
@@ -43,7 +47,7 @@ public class StaticPageController {
     public ModelAndView contactus() {
         ModelAndView modelAndView = new ModelAndView("/ContactUs");
 
-        String emailAddress = "example@makersbnb.com";
+        String emailAddress = "support@arcadiabnb.com";
         modelAndView.addObject("emailAddress", emailAddress);
 
 

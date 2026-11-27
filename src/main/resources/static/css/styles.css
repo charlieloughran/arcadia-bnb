@@ -167,7 +167,6 @@ main {
     box-shadow: 1px 1px 0px var(--border-color);
 }
 
-
 .btn-primary {
     background-color: var(--accent-color);
     color: var(--background-color);
@@ -175,7 +174,6 @@ main {
 
 .btn-primary:hover {
     box-shadow: 0px 0px 0px var(--border-color);
-
 }
 
 .btn-secondary {
@@ -199,13 +197,17 @@ main {
     color: var(--background-color);
 }
 
-.spaces-grid {
+/* Generalized Card Grids */
+.card-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 2rem;
     width: 100%;
+    list-style: none;
+    padding: 0;
 }
 
+/* Generalized Card Styles */
 .card {
     background-color: #ffffff;
     border: 3px solid var(--border-color);
@@ -218,19 +220,19 @@ main {
     height: 100%;
 }
 
-.space-price {
+.card .price {
     font-family: var(--font-main);
     font-size: 1.25rem;
     color: var(--accent-color);
     font-weight: 900;
 }
 
-.space-desc {
+.card .info {
     color: var(--text-muted);
     font-size: 0.95rem;
 }
 
-.space-availability {
+.card .space-availability {
     font-weight: 700;
     color: var(--text-main);
     font-size: 0.85rem;
@@ -297,7 +299,51 @@ main {
   letter-spacing: 0.5px;
 }
 
-/* Responsive breakpoint: Stack vertically on smaller screens */
+.reviews-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+}
+
+.review-item {
+    background-color: #ffffff;
+    border: 2px solid var(--border-color);
+    padding: 0.75rem 1rem;
+    font-size: 0.95rem;
+    color: var(--text-main);
+    box-shadow: 2px 2px 0px var(--border-color);
+}
+
+.stats-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    width: 100%;
+    margin: 1.5rem 0;
+}
+
+.stat-card {
+    background-color: #ffffff;
+    border: 3px solid var(--border-color);
+    box-shadow: 4px 4px 0px var(--border-color);
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.stat-number {
+    font-family: var(--font-main);
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: var(--accent-color);
+    margin-top: 0.5rem;
+    letter-spacing: 2px;
+}
+
 @media (max-width: 900px) {
   .search-section-wrapper {
     flex-direction: column;

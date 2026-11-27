@@ -22,7 +22,7 @@
     <h2 th:text="${nSpaces} + ' spaces are waiting to be discovered'"></h2>
 
 
-        <div class="spaces-grid">
+        <div class="card-grid">
             <div th:each="space : ${spaces}">
                 <div th:replace="~{space-card :: space-card}"></div>
             </div>
@@ -31,12 +31,20 @@
     </div>
 
 
-    <h4>Recent Reviews</h4>
-    <ul>
-    <li th:each="review : ${reviews}" th:text="${review}"></li>
-    </ul>
+    <div class="reviews-section">
+        <h4>Recent Reviews</h4>
+        <ul class="card-grid">
+            <li th:each="review : ${reviews}" class="review-item" th:text="${review}">No reviews yet.</li>
+        </ul>
 
-    <h5 th:text="'Number of bookings made last week: ' + ${nBookings}"></h5>
+        <div class="stats-container">
+            <div class="card stat-card">
+                <h4>Weekly Activity</h4>
+                <p class="info">Bookings secured over the past 7 days:</p>
+                <div class="stat-number" th:text="${nBookings}">0</div>
+            </div>
+        </div>
+    </div>
 
 </div>
 

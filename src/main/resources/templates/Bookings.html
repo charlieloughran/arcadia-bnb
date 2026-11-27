@@ -12,17 +12,17 @@
 <div th:insert="~{navbar :: navbar}">  </div>
 
 
-<main>
     <div class="container">
+        <h1>Bookings</h1>
 
-    <div class="dashboard-tabs">
+        <div class="dashboard-tabs">
             <button class="btn btn-primary tab-btn active" onclick="switchTab('my-bookings')">My Bookings (Trips)</button>
             <button class="btn btn-outline tab-btn" onclick="switchTab('my-spaces')">My Spaces (Host Reservations)</button>
         </div>
 
         <section id="my-bookings" class="tab-content">
             <h2>My Bookings</h2>
-            <div class="spaces-grid">
+            <div class="card-grid">
                 <div th:each="booking : ${myBookings}">
                     <div th:replace="~{booking-card ::booking-card}"></div>
                 </div>
@@ -32,19 +32,16 @@
 
         <section id="my-spaces" class="tab-content" style="display: none;">
             <h2>My Spaces & Incoming Reservations</h2>
-            <div class="spaces-grid">
 
-                <div class="spaces-grid">
+                <div class="card-grid">
                     <div th:each="space : ${mySpaces}">
                         <div th:replace="~{space-card :: space-card}"></div>
                     </div>
                 </div>
 
-            </div>
         </section>
 
     </div>
-</main>
 
 <script>
     function switchTab(tabId) {

@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>MakersBNB - Spaces</title>
+    <title>ArcadiaBNB - Spaces</title>
     <link rel="stylesheet" th:href="@{/css/styles.css}">
 
 </head>
@@ -13,11 +13,12 @@
 <div th:insert="~{navbar :: navbar}">  </div>
 
 <div class="container">
+    <h1>Spaces</h1>
 
     <div th:insert="~{searchbar :: searchbar}"> </div>
 
 
-    <div class="spaces-grid">
+    <div class="card-grid">
         <div th:each="space : ${spaces}">
             <div th:replace="~{space-card :: space-card}"></div>
         </div>
