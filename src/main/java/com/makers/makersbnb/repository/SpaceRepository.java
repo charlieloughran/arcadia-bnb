@@ -7,14 +7,17 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDate;
+import java.util.List;
 
 
 public interface SpaceRepository extends CrudRepository<Space, Long> {
 
-    @Query("SELECT row FROM Space row WHERE :availability BETWEEN row.availability_start AND row.availability_end")
-    Iterable<Space> findByAvailability(@Param("availability") LocalDate availability);
+    Iterable<Space> findByAvailabilityStartLessThanEqualAndAvailabilityEndGreaterThanEqual(
+            LocalDate availabilityStart,
+            LocalDate availabilityEnd
+    );
 
-    @Query("SELECT row FROM Space row WHERE row.availability_start <= :availability_start AND row.availability_end >= :availability_end")
-    Iterable<Space> findByAvailabilityStartAndEnd(@Param("availability_start") LocalDate availability_start, @Param("availability_end") LocalDate availability_end);
+    List<Space> findByUserId(Long userId);
+
 
 }

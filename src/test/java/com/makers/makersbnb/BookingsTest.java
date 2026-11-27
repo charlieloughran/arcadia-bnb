@@ -53,6 +53,7 @@ public class BookingsTest {
         bookingRepository.deleteAll();
     }
 
+
     @AfterEach
     void closeContext() {
         context.close();

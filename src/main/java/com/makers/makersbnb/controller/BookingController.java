@@ -2,10 +2,15 @@ package com.makers.makersbnb.controller;
 
 import com.makers.makersbnb.model.Booking;
 import com.makers.makersbnb.model.Space;
+import com.makers.makersbnb.model.User;
 import com.makers.makersbnb.repository.BookingRepository;
 import com.makers.makersbnb.repository.SpaceRepository;
+import com.makers.makersbnb.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.Banner;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.Iterator;
+import java.util.List;
 
 @RestController
 public class BookingController{
@@ -25,66 +31,34 @@ public class BookingController{
     @Autowired
     BookingRepository bookingRepository;
 
-    @PostMapping("/spaces/{id}/book")
-    public RedirectView bookSpace(@PathVariable Long id, Booking booking, Authentication authentication){
+    @Autowired
+    UserRepository userRepository;
 
-        Space space = spaceRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Space not found"));
+    @GetMapping("/bookings")
+    public ModelAndView showBookings(@AuthenticationPrincipal OidcUser oidcUser) {
+        ModelAndView mav = new ModelAndView("bookings");
 
-        String userId = "123123";
-
-        booking.setId(null);
-        booking.setSpace(space);
-        booking.setUserId(userId);
-
-        // Check if dates are null before doing date comparisons
-        if (booking.getBooked_from() == null || booking.getBooked_until() == null) {
-            System.out.println("Booking dates cannot be null");
-            return new RedirectView("/spaces/" + id);
+        if (oidcUser == null) {
+            return new ModelAndView("redirect:/oauth2/authorization/zitadel");
         }
 
-        // Check if dates are null before doing date comparisons
-        if (booking.getBooked_from().isAfter(booking.getBooked_until())) {
-            System.out.println("Date cannot be before");
-            return new RedirectView("/spaces/" + id);
-        }
+        String zitadelUserId = oidcUser.getSubject();
+        String userEmail = oidcUser.getEmail();
 
-        // Check if booking is outside space availability dates
-        if (booking.getBooked_from().isBefore(space.getAvailability_start()) || booking.getBooked_until().isAfter(space.getAvailability_end())) {
-            System.out.println("Space is not available between these dates");
-            return new RedirectView("/");
-        }
+        User user = userRepository.findByZitadelId(zitadelUserId)
+                .orElseGet(() -> {
+                    User newUser = new User();
+                    newUser.setZitadelId(zitadelUserId);
+                    newUser.setEmail(userEmail);
+                    return userRepository.save(newUser);
+                });
 
-        // Check each booking and see if there is a clash in dates
-        Iterable<Booking> currentBookings = bookingRepository.findAll();
-        boolean hasClash = false;
+        List<Booking> myBookings = bookingRepository.findByUserId(user.getId());
+        List<Space> mySpaces = spaceRepository.findByUserId(user.getId());
 
-        for (Booking existing : currentBookings) {
-            // Only check bookings for this specific space
-            if (existing.getSpace().getId().equals(space.getId())) {
+        mav.addObject("myBookings", myBookings);
+        mav.addObject("mySpaces", mySpaces);
 
-                // Check for date overlap
-                boolean overlaps = booking.getBooked_from().isBefore(existing.getBooked_until())
-                        && booking.getBooked_until().isAfter(existing.getBooked_from());
-
-                if (overlaps) {
-                    hasClash = true;
-                    System.out.println("There's a clash");
-                    break;
-                }
-            }
-        }
-
-        if (hasClash) {
-            String message = "Space is booked for these dates already";
-            System.out.println(message);
-            return new RedirectView("/spaces/" + id);
-        }
-
-        // If no overlaps, save the booking
-        bookingRepository.save(booking);
-        System.out.println("YOU'RE IN!");
-
-        return new RedirectView("/");
+        return mav;
     }
 }

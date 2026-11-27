@@ -10,8 +10,8 @@
     <p class="space-price" th:text="${'£' + space.price + ' / night'}"> / night</p>
     <p class="space-desc" th:text="*{description}">Description</p>
     <div class="space-availability">
-        <p th:text="*{availability_start}">Available From</p>
-        <p th:text="*{availability_end}">Available To</p>
+        <p th:text="*{availabilityStart}">Available From</p>
+        <p th:text="*{availabilityEnd}">Available To</p>
     </div>
     <a th:href="@{/spaces/{id}(id=*{id})}" class="btn btn-primary">View Details</a>
 </div>

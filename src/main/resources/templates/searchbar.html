@@ -7,7 +7,7 @@
 
 <div th:fragment="searchbar" class="search-section-wrapper">
     <!-- Single Date Search -->
-    <form class="search-form" th:action="@{/spaces/search}" method="get">
+    <form class="search-form" th:action="@{/spaces/searchByDate}" method="get">
         <div class="input-group">
             <label for="availability">Select Date</label>
             <input type="date" id="availability" name="availability" th:value="${selectedDate}" required />
@@ -20,7 +20,7 @@
     </div>
 
     <!-- Date Range Search -->
-    <form class="search-form" th:action="@{/spaces/improved_search}" method="get">
+    <form class="search-form" th:action="@{/spaces/searchByMultipleDates}" method="get">
         <div class="input-group">
             <label for="availability_start">Start Date</label>
             <input type="date" id="availability_start" name="availability_start" th:value="${selectedDate}" required />

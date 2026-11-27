@@ -24,17 +24,19 @@ public class Space {
     private String description;
     private Integer price;
     private String rules;
-    private LocalDate availability_start;
-    private LocalDate availability_end;
+    private LocalDate availabilityStart;
+    private LocalDate availabilityEnd;
+    private Long userId;
 
 
-    public Space(String name, String description, Integer price, String rules, LocalDate availability_start, LocalDate availability_end){
+    public Space(String name, String description, Integer price, String rules, LocalDate availabilityStart, LocalDate availabilityEnd, Long userId){
         this.name = name;
         this.description = description;
         this.price = price;
         this.rules = rules;
-        this.availability_start = availability_start;
-        this.availability_end = availability_end;
+        this.availabilityStart = availabilityStart;
+        this.availabilityEnd = availabilityEnd;
+        this.userId = userId;
     }
 
 
