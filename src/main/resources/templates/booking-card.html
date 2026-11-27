@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Booking Card</title>
+</head>
+<body>
+<div th:fragment="booking-card" class="card" th:object="${booking}">
+    <!-- Display the associated space name -->
+    <h3 th:text="*{space.name}">Space Name</h3>
+
+    <!-- Display the dates reserved -->
+    <p class="booking-dates">
+        <strong>From:</strong> <span th:text="*{booked_from}">Start Date</span> <br/>
+        <strong>To:</strong> <span th:text="*{booked_until}">End Date</span>
+    </p>
+
+    <!-- Optional: Total price calculation or space pricing -->
+    <p class="space-price" th:text="${'£' + booking.space.price + ' / night'}"> / night</p>
+
+    <!-- Link back to the space details page -->
+    <a th:href="@{/spaces/{id}(id=*{space.id})}" class="btn btn-secondary">View Space</a>
+</div>
+</body>
+</html>

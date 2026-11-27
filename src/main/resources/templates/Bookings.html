@@ -23,8 +23,8 @@
         <section id="my-bookings" class="tab-content">
             <h2>My Bookings</h2>
             <div class="spaces-grid">
-                <div th:each="space : ${spaces}">
-                    <div th:replace="~{space-card :: space-card}"></div>
+                <div th:each="booking : ${myBookings}">
+                    <div th:replace="~{booking-card ::booking-card}"></div>
                 </div>
             </div>
 

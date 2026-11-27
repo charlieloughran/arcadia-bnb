@@ -2,11 +2,14 @@ package com.makers.makersbnb.controller;
 
 import com.makers.makersbnb.model.Booking;
 import com.makers.makersbnb.model.Space;
+import com.makers.makersbnb.model.User;
+import com.makers.makersbnb.repository.UserRepository;
 import com.makers.makersbnb.repository.BookingRepository;
 import com.makers.makersbnb.repository.SpaceRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
@@ -22,6 +25,9 @@ public class SpacesController {
 
     @Autowired
     BookingRepository bookingRepository;
+
+    @Autowired
+    UserRepository userRepository;
 
 
     @GetMapping("/spaces")
@@ -102,6 +108,18 @@ public class SpacesController {
         if (authentication == null){
             return new RedirectView("/");
         }
+
+        OidcUser oidcUser = (OidcUser) authentication.getPrincipal();
+        String zitadelUserId = oidcUser.getSubject();
+        String userEmail = oidcUser.getEmail();
+
+        User user = userRepository.findByZitadelId(zitadelUserId)
+                .orElseGet(() -> {
+                    User newUser = new User();
+                    newUser.setZitadelId(zitadelUserId);
+                    newUser.setEmail(userEmail);
+                    return userRepository.save(newUser);
+                });
         Space space = spaceRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Space not found"));
 
@@ -109,7 +127,7 @@ public class SpacesController {
 
         booking.setId(null);
         booking.setSpace(space);
-        booking.setUserId(userId);
+        booking.setUserId(user.getId());
 
         // Check if dates are null before doing date comparisons
         if (booking.getBooked_from() == null || booking.getBooked_until() == null) {

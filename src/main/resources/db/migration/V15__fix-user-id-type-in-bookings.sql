@@ -1,0 +1,9 @@
+ALTER TABLE IF EXISTS bookings DROP CONSTRAINT IF EXISTS fk_booking_user;
+
+
+ALTER TABLE bookings ALTER COLUMN user_id TYPE BIGINT USING NULL;
+
+ALTER TABLE bookings
+ADD CONSTRAINT fk_booking_user
+FOREIGN KEY (user_id)
+REFERENCES users(id);

@@ -27,14 +27,14 @@ public class Booking {
 
 
     @Column(name= "user_id")
-    private String userId;
+    private Long userId;
 
     @ManyToOne
     @JoinColumn(name="space_id")
     private Space space;
 
 
-    public Booking(LocalDate booked_from, LocalDate booked_until, String userId, Space space) {
+    public Booking(LocalDate booked_from, LocalDate booked_until, Long userId, Space space) {
         this.booked_from = booked_from;
         this.booked_until = booked_until;
         this.userId = userId;
